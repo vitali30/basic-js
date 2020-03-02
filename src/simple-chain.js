@@ -1,24 +1,37 @@
 const chainMaker = {
+  chain: [],
   getLength() {
-    throw 'Not implemented';
-    // remove line with error and write your code here
+   return (this.chain.length);
   },
   addLink(value) {
-    throw 'Not implemented';
-    // remove line with error and write your code here
+    if (value == null) {
+            value = 'null';
+          }
+    this.chain.push(value);
+    return this;
   },
   removeLink(position) {
-    throw 'Not implemented';
-    // remove line with error and write your code here
-  },
+    if (position <=0 || typeof position != 'number' || position > this.chain.length){
+      this.chain = [];
+      throw new Error();
+    } 
+    else {this.chain.splice(position-1, 1);
+      return this;
+      }
+    },
+
   reverseChain() {
-    throw 'Not implemented';
-    // remove line with error and write your code here
+   this.chain.reverse();
+   return this;
   },
   finishChain() {
-    throw 'Not implemented';
-    // remove line with error and write your code here
+    let str = '( ' + this.chain.join(' )~~( ') + ' )';
+    this.chain = [];
+    return str;
+
   }
 };
-
 module.exports = chainMaker;
+//console.log(chainMaker.reverseChain().reverseChain().addLink(NaN).addLink({0: 'first', 1: 'second', 'length': 2}).addLink({0: 'first', 1: 'second', 'length': 2}).addLink({0: 'first', 1: 'second', 'length': 2}).reverseChain().reverseChain().addLink({0: 'first', 1: 'second', 'length': 2}).addLink(true).finishChain())
+//, '( NaN )~~( [object Object] )~~( [object Object] )~~( [object Object] )~~( [object Object] )~~( true )'
+
